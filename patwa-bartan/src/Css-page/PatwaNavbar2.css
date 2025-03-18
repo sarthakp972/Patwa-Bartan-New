@@ -1,0 +1,75 @@
+/* Premium Navbar Styling */
+.compact-navbar {
+    background: linear-gradient(to right, #09203f, #537895); /* Gradient background */
+    padding: 12px 0;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid #ffcc00; /* Elegant gold line */
+}
+
+/* Navigation Links */
+.compact-navbar .nav-link {
+    color: #ffffff !important;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 12px 20px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Add glowing underline on hover */
+.compact-navbar .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0%;
+    height: 2px;
+    background: #ffcc00; /* Gold color */
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.compact-navbar .nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+.compact-navbar .nav-link:hover {
+    color: #ffdd57 !important; /* Luxurious gold hover effect */
+}
+
+/* Active Category Styling */
+.active-category {
+    font-weight: bold;
+    color: #ffcc00 !important; /* Gold color */
+    text-shadow: 0px 0px 8px rgba(255, 204, 0, 0.8); /* Soft glow effect */
+    border-bottom: 2px solid #ffcc00;
+}
+
+/* Dropdown Menu */
+.compact-navbar .dropdown-menu {
+    background: #0c5273;
+    border-radius: 8px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown Items */
+.compact-navbar .dropdown-item {
+    color: white !important;
+    padding: 10px 15px;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Dropdown Item Hover */
+.compact-navbar .dropdown-item:hover {
+    background: #ff5733 !important; /* Orange-red hover */
+    color: #ffffff !important;
+    border-radius: 5px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .compact-navbar .nav-link {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}

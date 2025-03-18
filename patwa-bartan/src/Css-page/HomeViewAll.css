@@ -1,0 +1,154 @@
+.product-section {
+    text-align: center;
+    padding: 40px 20px;
+    background: #f8f9fa;
+  }
+  
+  .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0078ad;
+    margin-bottom: 30px;
+  }
+  
+  /* Default card style */
+  .product-card {
+    width: 100%;
+    max-width: 250px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    padding: 10px;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Desktop View */
+  .product-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .product-img {
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .product-details {
+    margin-top: 10px;
+  }
+  
+  .product-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .product-description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .product-price {
+    font-size: 16px;
+    color: #0078ad;
+    font-weight: bold;
+  }
+  
+  /* Discount styling */
+  .product-discount {
+    font-size: 14px;
+    color: red;
+    font-weight: bold;
+    background: rgba(255, 0, 0, 0.1);
+    padding: 3px 6px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  
+  /* Add to Cart Button */
+  .add-to-cart-btn {
+    background-color: #ff4500;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #d93b00;
+  }
+  
+  /* View All Products */
+  .view-all-container {
+    margin-top: 20px;
+  }
+  
+  .view-all-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0078ad;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .view-all-text:hover {
+    color: #005f85;
+  }
+  
+  /* 🔽 Mobile View: Amazon-style layout */
+  @media (max-width: 768px) {
+    .product-card {
+      max-width: 100%;
+      text-align: left;
+    }
+  
+    .product-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    .product-img {
+      width: 40%;
+      height: auto;
+      max-height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  
+    .product-details {
+      width: 60%;
+      padding-left: 10px;
+    }
+  
+    .product-name {
+      font-size: 14px;
+    }
+  
+    .product-description {
+      font-size: 12px;
+    }
+  
+    .product-price {
+      font-size: 14px;
+    }
+  
+    .product-discount {
+      font-size: 12px;
+    }
+  
+    .view-all-text {
+      font-size: 16px;
+    }
+  }
+  

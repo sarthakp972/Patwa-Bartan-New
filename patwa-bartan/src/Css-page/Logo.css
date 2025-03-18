@@ -1,0 +1,41 @@
+.logo-container {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-text {
+    font-size: clamp(18px, 2vw, 24px); /* Responsive font size */
+    font-weight: 700;
+    color: #0c5273; /* Professional dark blue */
+    text-transform: uppercase;
+    font-family: "Mukta", sans-serif;
+    margin: 0;
+    white-space: nowrap; /* Prevents logo from wrapping */
+}
+
+.highlight {
+    color: #ffcc00; /* Golden color for elegance */
+}
+
+/* Extra small screens */
+@media (max-width: 576px) {
+    .logo-text {
+        font-size: 18px; /* Slightly smaller for mobile */
+    }
+}
+
+/* Small to medium screens */
+@media (min-width: 577px) and (max-width: 768px) {
+    .logo-text {
+        font-size: 20px;
+    }
+}
+
+/* Large screens */
+@media (min-width: 769px) {
+    .logo-text {
+        font-size: 24px;
+    }
+}

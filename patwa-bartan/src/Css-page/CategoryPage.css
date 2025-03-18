@@ -1,0 +1,153 @@
+/* Premium Glassmorphism Card Styling */
+.category-page .product-card {
+  border-radius: 15px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: none;
+}
+
+.category-page .product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive Card Layout for Small Screens */
+@media (max-width: 576px) {
+  .category-page .product-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .category-page .product-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+
+  .category-page .product-card .card-body {
+    padding: 5px;
+    flex: 1;
+  }
+
+  .category-page .product-title {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .category-page .product-description {
+    font-size: 0.85rem;
+    text-align: left;
+    margin: 5px 0;
+  }
+
+  .category-page .price-section {
+    justify-content: start;
+  }
+
+  .category-page .add-cart-button {
+    width: auto;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Product Image */
+.category-page .product-image {
+  height: 220px;
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.category-page .product-card:hover .product-image {
+  opacity: 0.9;
+}
+
+/* Product Title */
+.category-page .product-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* Product Description */
+.category-page .product-description {
+  font-size: 0.95rem;
+  color: #555;
+  text-align: center;
+  margin: 3px 0;
+  transition: color 0.3s ease-in-out;
+  font-style: italic;
+  padding: 0 5px;
+}
+
+.category-page .product-description:hover {
+  color: #2575fc;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Pricing Section */
+.category-page .price-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 3px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Discounted Price */
+.category-page .discount-price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+/* Original Price */
+.category-page .original-price {
+  font-size: 1rem;
+  text-decoration: line-through;
+  color: #7f8c8d;
+}
+
+/* Discount Badge */
+.category-page .discount-label {
+  background: linear-gradient(45deg, #ff512f, #dd2476);
+  color: white;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* Add to Cart Button */
+.category-page .add-cart-button  {
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  color: white;
+  font-size: 0.95rem;
+  border: none;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  margin-top: 6px;
+}
+
+.category-page .add-cart-button:hover {
+  background: linear-gradient(45deg, #2575fc, #6a11cb);
+  transform: scale(1.05);
+}

@@ -1,0 +1,88 @@
+/* AllProducts.css */
+.all-products-page .product-card {
+  transition: transform 0.3s ease-in-out;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.all-products-page .product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.all-products-page .product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+.all-products-page .product-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.all-products-page .product-description {
+  font-size: 0.9rem;
+  color: #777;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.all-products-page .price-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.all-products-page .discount-price {
+  color: red;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.all-products-page .original-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 1rem;
+  margin-left: 10px;
+}
+
+.all-products-page .discount-label {
+  background: red;
+  color: white;
+  padding: 3px 6px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+}
+
+.all-products-page .cart-button {
+  width: 100%;
+  margin-top: 10px;
+  background: #007bff;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.all-products-page .cart-button:hover {
+  background: #0056b3;
+}
+
+.all-products-page .load-more-btn {
+  background: #007bff;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.all-products-page .load-more-btn:hover {
+  background: #0056b3;
+}
