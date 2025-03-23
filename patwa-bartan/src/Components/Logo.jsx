@@ -1,12 +1,14 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import "../Css-page/Logo.css";
 
 const Logo = () => {
   return (
-    <Container className="d-flex align-items-center justify-content-center logo-container">
-      <h1 className="logo-text">पटवा <span className="highlight">बर्तन भंडार</span></h1>
-    </Container>
+    <Image
+      src="https://res.cloudinary.com/dl5htbjf8/image/upload/t_Pateabartan%20logo/v1742657508/Dark_Green_Henna_Art_Business_Logo_20250322_210000_0000-removebg-preview_jesujo.png"
+      alt="Patwa Bartan Logo"
+      className="patwa-logo"
+    />
   );
 };
 

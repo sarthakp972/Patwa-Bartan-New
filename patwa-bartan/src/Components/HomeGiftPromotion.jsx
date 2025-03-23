@@ -1,14 +1,13 @@
 import "../Css-page/HomeGiftPromotion.css";
 import React from "react";
 import { Container, Button } from "react-bootstrap";
-// import "../Css-page/GiftPromotion.css";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 
 const GiftPromotion = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate(); // ✅ Hook for navigation
 
   const handleExploreClick = () => {
-   // navigate("/gifts"); // Redirects to the gift section
+    navigate("/category/gift"); // ✅ Redirect to the Gift category page
   };
 
   return (

@@ -1,87 +1,60 @@
-import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container, Button } from "react-bootstrap";
+import { ref, onValue } from "firebase/database";
+import { realtimeDB } from "../FirebaseConfig";
+import { Link } from "react-router-dom";
+import useCart from "../context/useCart";
 import "../Css-page/HomeHero2.css";
 
-const lootProducts = [
-  {
-    name: "Steel Water Bottle",
-    image: "https://ptal.in/cdn/shop/files/DSC_7040.jpg?v=1737716463&width=720",
-    oldPrice: 500,
-    newPrice: 299,
-    discount: "40%",
-    description: "स्टील की मजबूत और टिकाऊ पानी की बोतल, जो स्वास्थ्य के लिए सुरक्षित और पर्यावरण के अनुकूल है।",
-  },
-  {
-    name: "Copper Jug",
-    image: "https://ptal.in/cdn/shop/files/DSC_7040.jpg?v=1737716463&width=720",
-    oldPrice: 1200,
-    newPrice: 799,
-    discount: "33%",
-    description: "तांबे का जग, जो पानी को शुद्ध करता है और आपको सेहतमंद बनाए रखता है।",
-  },
-  {
-    name: "Brass Kadhai",
-    image: "https://ptal.in/cdn/shop/files/DSC_7040.jpg?v=1737716463&width=720",
-    oldPrice: 1500,
-    newPrice: 999,
-    discount: "34%",
-    description: "शुद्ध पीतल की कढ़ाई, जिसमें स्वादिष्ट भारतीय व्यंजन बनाए जा सकते हैं। इसका उपयोग लंबे समय तक किया जा सकता है।",
-  },
-  {
-    name: "Brass Kadhai",
-    image: "https://ptal.in/cdn/shop/files/DSC_7040.jpg?v=1737716463&width=720",
-    oldPrice: 1500,
-    newPrice: 999,
-    discount: "34%",
-    description: "शुद्ध पीतल की कढ़ाई, जिसमें स्वादिष्ट भारतीय व्यंजन बनाए जा सकते हैं। इसका उपयोग लंबे समय तक किया जा सकता है।",
-  },
-  {
-    name: "Brass Kadhai",
-    image: "https://ptal.in/cdn/shop/files/DSC_7040.jpg?v=1737716463&width=720",
-    oldPrice: 1500,
-    newPrice: 999,
-    discount: "34%",
-    description: "शुद्ध पीतल की कढ़ाई, जिसमें स्वादिष्ट भारतीय व्यंजन बनाए जा सकते हैं। इसका उपयोग लंबे समय तक किया जा सकता है।",
-  },
-  {
-    name: "Brass Kadhai",
-    image: "https://ptal.in/cdn/shop/files/DSC_7040.jpg?v=1737716463&width=720",
-    oldPrice: 1500,
-    newPrice: 999,
-    discount: "34%",
-    description: "शुद्ध पीतल की कढ़ाई, जिसमें स्वादिष्ट भारतीय व्यंजन बनाए जा सकते हैं। इसका उपयोग लंबे समय तक किया जा सकता है।",
-  },
-  {
-    name: "Brass Kadhai",
-    image: "https://ptal.in/cdn/shop/files/DSC_7040.jpg?v=1737716463&width=720",
-    oldPrice: 1500,
-    newPrice: 999,
-    discount: "34%",
-    description: "शुद्ध पीतल की कढ़ाई, जिसमें स्वादिष्ट भारतीय व्यंजन बनाए जा सकते हैं। इसका उपयोग लंबे समय तक किया जा सकता है।",
-  },
-];
-
-const truncateText = (text, length) => {
-  return text.length > length ? text.substring(0, length) + "..." : text;
-};
-
 const HomeHero2 = () => {
+  const [products, setProducts] = useState([]);
+  const { addToCart } = useCart();
+
+  useEffect(() => {
+    const homeDiscountRef = ref(realtimeDB, "home_discount_product");
+
+    const unsubscribe = onValue(homeDiscountRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const productList = Object.keys(data).map((key) => ({ id: key, ...data[key] }));
+        setProducts(productList);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <Container className="loot-sale-container my-5">
       <h2 className="section-title text-center">💥 लूट सेल - भारी छूट पर उत्पाद! 💥</h2>
       <div className="loot-sale-wrapper">
-        {lootProducts.map((product, index) => (
-          <div key={index} className="loot-sale-card">
-            <img src={product.image} alt={product.name} className="product-image" />
-            <h4 className="product-name mt-2">{product.name}</h4>
-            <p className="product-description">{truncateText(product.description, 50)}</p>
-            <p className="product-price">
-              <span className="old-price">₹{product.oldPrice}</span> <span className="new-price">₹{product.newPrice}</span>
-              <span className="discount-badge ms-2"> छूट: {product.discount}</span>
-            </p>
-            <Button className="add-to-cart-btn">कार्ट में जोड़ें </Button>
-          </div>
-        ))}
+        {products.length > 0 ? (
+          products.map((product) => (
+            <div key={product.id} className="loot-sale-card">
+              <Link to={`/product/${product.id}`} state={{ product }}>
+                <img
+                  src={product.images?.main || "https://via.placeholder.com/400"}
+                  alt={product.Title}
+                  className="product-image"
+                />
+              </Link>
+              <h4 className="product-name mt-2">{product.Title}</h4>
+              <p className="product-description">{product.description}</p>
+              <p className="product-price">
+                <span className="old-price">₹{product.Price}</span>
+                <span className="new-price">
+                  ₹{(product.Price * (1 - parseFloat(product.discount) / 100)).toFixed(2)}
+                </span>
+                <span className="discount-badge ms-2"> छूट: {product.discount}%</span>
+              </p>
+              <Button className="add-to-cart-btn" onClick={() => addToCart({ ...product, quantity: 1 })}>
+                कार्ट में जोड़ें
+              </Button>
+            </div>
+          ))
+        ) : (
+          <p className="text-center">⏳ उत्पाद लोड हो रहे हैं...</p>
+        )}
       </div>
     </Container>
   );

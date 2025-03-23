@@ -1,99 +1,120 @@
+import React, { useState, useEffect } from "react";
+import { Card, Button, Container, Row, Col, Spinner } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { ref, get } from "firebase/database";
+import { realtimeDB } from "../FirebaseConfig";
+import useCart from "../context/useCart";
 import "../Css-page/HomeViewAll.css";
-import React from "react";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { Nav } from "react-bootstrap";
-
-// import { useNavigate } from "react-router-dom";
-
-const products = [
-  { 
-    id: 1, 
-    name: "Steel Plate", 
-    description: "मजबूत स्टील से बनी खाने की प्लेट, टिकाऊ और सुरक्षित।",
-    price: "₹500", 
-    discount: "10%", 
-    img: "https://www.jiomart.com//images/product/original/494226707/wonderchef-crescent-electric-kettle-1-5-l-digital-o494226707-p609129469-0-202411271819.jpeg?im=Resize=(310,310)" 
-  },
-  { 
-    id: 2, 
-    name: "Brass Glass", 
-    description: "पीतल का ग्लास जो पानी को शुद्ध और स्वास्थ्यवर्धक बनाता है।",
-    price: "₹700", 
-    discount: "15%", 
-    img: "/images/brass-glass.jpg" 
-  },
-  { 
-    id: 3, 
-    name: "Kansa Bowl", 
-    description: "कांसे का कटोरा, पारंपरिक भारतीय भोजन के लिए उपयुक्त।",
-    price: "₹650", 
-    img: "/images/kansa-bowl.jpg" 
-  },
-  { 
-    id: 4, 
-    name: "Copper Bottle", 
-    description: "100% शुद्ध तांबे की बोतल, जो पानी को क्षारीय बनाती है।",
-    price: "₹1200", 
-    discount: "20%", 
-    img: "/images/copper-bottle.jpg" 
-  },
-  { 
-    id: 5, 
-    name: "Aluminum Pot", 
-    description: "हल्का और मजबूत एल्यूमिनियम बर्तन, खाना पकाने के लिए उत्तम।",
-    price: "₹900", 
-    img: "/images/aluminum-pot.jpg" 
-  },
-  { 
-    id: 6, 
-    name: "Puja Thali", 
-    description: "पूजा के लिए सुंदर और पारंपरिक थाली, धार्मिक अनुष्ठानों के लिए।",
-    price: "₹450", 
-    discount: "5%", 
-    img: "/images/puja-thali.jpg" 
-  },
-  { 
-    id: 7, 
-    name: "Plastic Bucket", 
-    description: "मजबूत प्लास्टिक बाल्टी, घरेलू और सफाई कार्यों के लिए।",
-    img: "/images/plastic-bucket.jpg" 
-  },
-];
 
 const HomeViewAll = () => {
-//   const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const { addToCart } = useCart();
+    const navigate = useNavigate();
 
-  return (
-    <Container className="product-section">
-      <h2 className="section-title">विशेष उत्पाद</h2>
-      <Row className="justify-content-center">
-        {products.map((product) => (
-          <Col key={product.id} xs={12} sm={6} md={4} lg={3} className="d-flex justify-content-center">
-            <Card className="product-card"> {/* onClick={() => navigate(`/product/${product.id}`)} */}
-              <div className="product-content">
-                <img src={product.img} alt={product.name} className="product-img" />
-                <div className="product-details">
-                  <Card.Title className="product-name">{product.name}</Card.Title>
-                  <Card.Text className="product-description">{product.description}</Card.Text>
-                  {product.price && <Card.Text className="product-price">{product.price}</Card.Text>}
-                  {product.discount && <Card.Text className="product-discount">छूट: {product.discount}</Card.Text>}
-                  <Button variant="primary" className="add-to-cart-btn">कार्ट में जोड़ें</Button>
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const dbRef = ref(realtimeDB, "home_vishesh_product");
+                const snapshot = await get(dbRef);
+
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    const productsArray = Object.entries(data).map(([id, product]) => ({
+                        id,
+                        ...product,
+                    }));
+                    setProducts(productsArray);
+                } else {
+                    console.log("No data available");
+                }
+            } catch (err) {
+                console.error("Error fetching data:", err);
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    const handleCardClick = (event, product) => {
+        if (!event.target.closest(".add-cart-button")) {
+            navigate(`/product/${product.id}`, { state: { product } });
+        }
+    };
+
+    return (
+        <Container className="home-view-all">
+            <h2 className="section-title">विशेष उत्पाद</h2>
+            {loading && (
+                <div className="text-center my-5">
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
                 </div>
-              </div>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+            )}
+            {error && <p style={{ color: "red" }}>Error: {error}</p>}
+            
+            {/* Responsive Grid System */}
+            <Row className="justify-content-center ">
+                {products.map((product) => (
+                    <Col key={product.id} xs={6} sm={4} md={3} lg={3} className="d-flex justify-content-center product-row">
+                        <Card className="product-card" onClick={(e) => handleCardClick(e, product)}>
+                            <div className="product-content">
+                                <div className="product-image-container">
+                                    {product.discount && <div className="sale-badge">छूट: {product.discount}%</div>}
+                                    <img src={product.images?.main || "default-image.jpg"} alt={product.Title} className="product-img" />
+                                </div>
+                                <div className="product-details">
+                                    <Card.Title className="product-title">{product.Title}</Card.Title>
+                                    <Card.Text className="product-description">
+                                        {product.description && product.description.length > 50
+                                            ? `${product.description.substring(0, 50)}...`
+                                            : product.description}
+                                    </Card.Text>
+                                    <div className="price-section">
+                                        {product.discount ? (
+                                            <>
+                                                <span className="discount-price">₹{(product.Price * (1 - product.discount / 100)).toFixed(2)}</span>
+                                                <span className="original-price">₹{product.Price}</span>
+                                            </>
+                                        ) : (
+                                            <span className="discount-price">₹{product.Price}</span>
+                                        )}
+                                    </div>
+                                    <Button
+                                        variant="primary"
+                                        className="add-cart-button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            addToCart({ 
+                                                ...product, 
+                                                quantity: 1, 
+                                                description: product.description && product.description.length > 50 
+                                                    ? `${product.description.substring(0, 50)}...` 
+                                                    : product.description 
+                                            });
+                                        }}
+                                    >
+                                        कार्ट में जोड़ें
+                                    </Button>
+                                </div>
+                            </div>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
 
-      {/* View All Products - Now Underlined Text */}
-      <div className="view-all-container">
-      <Nav.Link as={Link} to="/all-products"> <p className="view-all-text" >सभी उत्पाद देखें</p></Nav.Link>
-
-       
-      </div>
-    </Container>
-  );
+            <div className="view-all-container text-center">
+                <Link to="/all-products" className="view-all-link">
+                    सभी उत्पाद देखें (click)
+                </Link>
+            </div>
+        </Container>
+    );
 };
 
 export default HomeViewAll;

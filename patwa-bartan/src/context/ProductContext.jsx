@@ -9,31 +9,36 @@ export const ProductProvider = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState(""); // Default category
 
   useEffect(() => {
-    const fetchAllProducts = async () => {
+    const requiredCategories = [ // ✅ Moved inside useEffect
+      "Pital", "copper", "aluminium", "cookware", "electronic",
+      "gift", "kanch_chhini", "kansa", "lakdhi", "nonstick",
+      "plastic", "pooja_saman", "steel"
+    ];
+
+    const fetchSelectedProducts = async () => {
       try {
-        const dbRef = ref(realtimeDB);
-        const snapshot = await get(dbRef);
-  
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          console.log("Fetched Categories:", Object.keys(data)); // Debugging Log
-  
-          let productData = {};
-          Object.keys(data).forEach((category) => {
-            productData[category] = Object.values(data[category] || {});
-          });
-  
-          setProducts(productData);
-        } else {
-          console.warn("No data found in Firebase");
+        let productData = {};
+
+        for (const category of requiredCategories) {
+          const categoryRef = ref(realtimeDB, category);
+          const snapshot = await get(categoryRef);
+
+          if (snapshot.exists()) {
+            productData[category] = Object.values(snapshot.val() || {});
+          } else {
+            console.warn(`No data found for category: ${category}`);
+          }
         }
+
+        console.log("Fetched Categories:", Object.keys(productData)); // Debugging Log
+        setProducts(productData);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
-  
-    fetchAllProducts();
-  }, []);
+
+    fetchSelectedProducts();
+  }, []); // ✅ No need to add requiredCategories in dependencies
 
   return (
     <ProductContext.Provider value={{ products, selectedCategory, setSelectedCategory }}>

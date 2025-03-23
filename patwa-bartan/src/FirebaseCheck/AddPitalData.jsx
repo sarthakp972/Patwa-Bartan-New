@@ -2,15 +2,15 @@ import React from "react";
 import { realtimeDB } from "../FirebaseConfig"; // Import Realtime Database
 import { ref, push, set } from "firebase/database";
 
-const addaluminiumData = () => {
+const addhome_discount_productData = () => {
   try {
-    const aluminiumRef = ref(realtimeDB, "aluminium"); // Reference to 'Pital' table
+    const home_discount_productRef = ref(realtimeDB, "home_discount_product"); // Reference to 'Pital' table
 
     // Sample data
-    const aluminiumProducts = [
+    const home_discount_productProducts = [
       {
-        "id": "aluminium1",
-        "Title": "aluminium Bowl",
+        "id": "home_discount_product1",
+        "Title": "home_discount_product Bowl",
         "images": {
           "main": "https://example.com/main-image.jpg",
           "sub": [
@@ -24,7 +24,7 @@ const addaluminiumData = () => {
         "discount": "10%",
         "Price": "1050",
         "Brand": "Local",
-        "Metal": "aluminium",
+        "Metal": "home_discount_product",
         "weight": "2kg",
         "AboutThisItem": "Durable and long-lasting.",
         "otherOffer": "false",
@@ -34,8 +34,8 @@ const addaluminiumData = () => {
     ];
 
     // Loop through array and add each item using push (creates unique keys)
-   aluminiumProducts.forEach((product) => {
-      const newProductRef = push(aluminiumRef); // Create a new key for each item
+   home_discount_productProducts.forEach((product) => {
+      const newProductRef = push(home_discount_productRef); // Create a new key for each item
       set(newProductRef, product); // Store the product under the unique key
     });
 
@@ -49,7 +49,7 @@ const AddPital = () => {
   return (
     <div>
       <h2>Add Pital Data to Firebase</h2>
-      <button onClick={addaluminiumData}>Add Pital Data</button>
+      <button onClick={addhome_discount_productData}>Add Pital Data</button>
     </div>
   );
 };

@@ -1,129 +1,97 @@
-.footer {
+/* Ensure styles apply only to this footer */
+.custom-footer {
   background-color: #082032; /* Deep blue shade for a premium feel */
-  color: white;
-  padding: 50px 20px;
-  font-family: 'Mukta', sans-serif;
+  border-bottom: 3px solid #ffcc00;
+  color:  #ffdd57 !important;;
+  padding: 40px 0;
+}
+.custom-footer .footer-info {
+  color: #f66f14d5 !important;  /* Change to your preferred color */
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-.footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: auto;
-  gap: 20px;
+
+.footer-logo {
+  width: 150px;
+  margin-bottom: 15px;
 }
 
-.footer-section {
-  flex: 1;
-  min-width: 250px;
-  margin-bottom: 20px;
+.footer-heading {
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
-.footer-section h4 {
-  font-size: 20px;
-  margin-bottom: 12px;
-  border-bottom: 3px solid #ffcc00; /* Gold Accent */
-  display: inline-block;
-  padding-bottom: 6px;
-}
-
-.footer-section ul {
+.footer-list {
   list-style: none;
   padding: 0;
 }
 
-.footer-section ul li {
-  margin-bottom: 10px;
+.footer-list li {
+  margin-bottom: 8px;
 }
 
-.footer-section ul li a {
-  color: white;
+.footer-link {
   text-decoration: none;
-  font-size: 16px;
-  transition: color 0.3s;
-}
-
-.footer-section ul li a:hover {
-  color: #ffcc00; /* Gold Accent on Hover */
-}
-
-.subscribe-box {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.subscribe-box input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid white;
-  background: #1c2b38;
   color: white;
+  transition: 0.3s;
 }
 
-.subscribe-box input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.subscribe-box button {
-  background-color: #ffcc00;
-  border: none;
-  padding: 10px 14px;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background 0.3s;
-}
-
-.subscribe-box button:hover {
-  background-color: #d4a300;
-}
-
-.social-icons {
-  margin-top: 15px;
-}
-
-.social-icons a {
-  margin-right: 15px;
-  font-size: 24px;
-  color: white;
-  transition: color 0.3s, transform 0.3s;
-}
-
-.social-icons a:hover {
+.footer-link:hover {
   color: #ffcc00;
-  transform: scale(1.1);
 }
 
-.footer-bottom {
-  text-align: center;
-  padding: 25px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+.footer-subscribe {
+  display: flex;
+  gap: 8px;
+}
+
+.footer-input {
+  flex-grow: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.footer-btn {
+  background: rgb(248, 255, 116);
+  color: rgba(18, 81, 18, 0.574);
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+font-weight: bolder;
+}
+
+/* .footer-btn:hover {
+  /* background: #e6b800;
+} */
+
+.footer-social {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.footer-icon {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-icon:hover {
+  color: #ffcc00;
+}
+
+.footer-divider {
+  background: white;
   margin-top: 20px;
 }
 
-.company-info p {
-  margin: 6px 0;
-  font-size: 14px;
-  opacity: 0.8;
+.footer-text {
+  text-align: center;
+  margin-top: 10px;
 }
-
-.footer-logo {
-  max-width: 160px;
-  margin-bottom: 12px;
-  filter: brightness(1.2);
-}
-
-@media (max-width: 768px) {
-  .footer-container {
-      flex-direction: column;
-      text-align: center;
-  }
-
-  .subscribe-box {
-      flex-direction: column;
-  }
+.sarthak-footer{
+  color: aliceblue;
 }

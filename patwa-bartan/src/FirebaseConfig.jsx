@@ -1,7 +1,7 @@
 // Import necessary Firebase modules
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getDatabase } from "firebase/database";
 
@@ -25,4 +25,6 @@ export const db = getFirestore(app); // Firestore database
 export const auth = getAuth(app); // Firebase authentication
 export const storage = getStorage(app); // Firebase storage
 export const realtimeDB = getDatabase(app); // Realtime database
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" }); 
 export default app;

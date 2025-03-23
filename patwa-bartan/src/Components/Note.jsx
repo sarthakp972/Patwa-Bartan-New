@@ -1,5 +1,5 @@
 import React from "react";
-import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaFacebook } from "react-icons/fa";
+import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaFacebook, FaInstagram } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import "./Note.css"; // Add styles for animation and layout
 
@@ -30,7 +30,7 @@ const Note = () => {
       </p>
       
       <p>📧 <strong>ईमेल:</strong> <br />
-        <FaEnvelope className="text-primary" /> <a href="mailto:maakherapatinavdurgautsavsamit@gmail.com" className="text-dark">maakherapatinavdurgautsavsamit@gmail.com</a>
+        <FaEnvelope className="text-primary" /> <a href="mailto:Patwa.bartan.bhandar@gmail.com" className="text-dark">Patwa.bartan.bhandar@gmail.com</a>
       </p>
       
       <p>🔄 <strong>पुराने बने बर्तन (पीतल, जर्मन, तांबा, कांसा) वापस बदले जाते हैं और काटे जाते हैं।</strong> <br />
@@ -38,8 +38,16 @@ const Note = () => {
       </p>
       
       <p>🌐 <strong>हमसे जुड़ें:</strong> <br />
-        <FaFacebook className="text-primary" /> <a href="https://facebook.com" className="text-dark"> Facebook पर देखें</a>
+        <FaFacebook className="text-primary" /> <a href="https://www.facebook.com/share/1Br69UNZmq/" className="text-dark"> Facebook पर देखें</a>
+
+      
+ 
       </p>
+    <p>
+       
+    <FaInstagram className="text-danger"  /> <a href="https://www.instagram.com/patwa_bartna_harrai?igsh=MWZjeng4aThwZGJpbA%3D%3D" className="text-dark" target="_blank" rel="noopener noreferrer">  Instagram पर देखें 
+  </a>
+    </p>
     </div>
   );
 };
