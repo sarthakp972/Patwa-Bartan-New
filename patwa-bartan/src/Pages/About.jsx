@@ -1,7 +1,11 @@
 import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import "../Css-page/About.css";
-import MeetCreators from "../Components/MeetCreators";
+// import MeetCreators from "../Components/MeetCreators";
+const owners = [
+  { name: "श्री जयप्रकाश पटवा", mobile: "+91 9977454799" },
+  { name: "श्री चन्द्रप्रकाश पटवा", mobile: "+91 9407003015" },
+];
 
 const About = () => {
   return (
@@ -91,8 +95,31 @@ const About = () => {
           **बेहतर उत्पाद और सेवाएँ** प्रदान करने में मेहनत कर रहे हैं।
         </p>
       </section>
+  {/* <MeetCreators/> */}
+  <div className="container mt-5">
+      {/* Title with Underline Effect */}
+      <h2 className="text-center fw-bold text-danger">पटवा बर्तन भंडार</h2>
+      <div className="text-center mb-4">
+        <hr className="w-25 mx-auto border-3 border-danger" />
+      </div>
+
+      <div className="row justify-content-center">
+        {owners.map((owner, index) => (
+          <div className="col-md-4" key={index}>
+            <div className="card text-center border-0 shadow-lg p-3">
+              <div className="card-body">
+                <h4 className="card-title text-primary fw-bold">{owner.name}</h4>
+                <p className="card-text text-dark fs-5">
+                  <strong>मोबाइल:</strong> {owner.mobile}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
     </Container>
-    <MeetCreators/>
+  
     </>
   );
 };
