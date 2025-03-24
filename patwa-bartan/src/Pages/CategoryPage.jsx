@@ -5,8 +5,8 @@ import useCart from "../context/useCart";
 import { Card, Button, Row, Col, Container, Spinner } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import "../Css-page/CategoryPage.css";
-import Loading from "../Components/Loading";
-import BackToTopButton from "../Components/BackToTopButton";
+// import Loading from "../Components/Loading";
+// import BackToTopButton from "../Components/BackToTopButton";
 
 const categoryNames = {
   Pital: "पीतल",
@@ -58,11 +58,11 @@ const CategoryPage = () => {
                   <Link to={`/product/${product.id}`} className="text-decoration-none text-dark">
                     <Card.Title className="product-title">{product.Title}</Card.Title>
                   </Link>
-                  <p className="product-description">
+                  {/* <p className="product-description">
                     {product.description.length > 70
                       ? product.description.substring(0, 67) + "..."
                       : product.description}
-                  </p>
+                  </p> */}
                   <div className="price-section">
                     {product.discount ? (
                       <>
@@ -87,7 +87,11 @@ const CategoryPage = () => {
             </Col>
           ))
         ) : (
-          <p className="text-center"><Spinner animation="border" variant="primary" /> {categoryTitle} में  उत्पाद विवरण लोड हो रहा है...।</p>
+          <div className="text-center">
+          <Spinner animation="border" variant="primary" />
+          <p>{categoryTitle} में उत्पाद विवरण लोड हो रहा है...।</p>
+        </div>
+        
         )}
       </Row>
   

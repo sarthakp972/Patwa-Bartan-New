@@ -1,73 +1,74 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import useProducts from '../context/useProducts';
+import { useParams } from 'react-router-dom'; // To access the URL params
+import useProductSearch from '../context/useProductSearch'; // Adjust path as needed
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
-const SearchResults = () => {
-  const { query } = useParams();
-  const navigate = useNavigate();
-  const { products } = useProducts();
-
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(true);
+function SearchResults() {
+  const { query } = useParams(); // Get the query from the URL
+  const { products, loading } = useProductSearch(); // Access products from context
+  const [results, setResults] = useState([]); // State for search results
 
   useEffect(() => {
-    const fetchResults = () => {
-      const categoryRedirects = {
-        pital: 'Pital',
-        aluminium: 'aluminium',
-        cookware: 'cookware',
-        copper: 'copper',
-        nonstick:'nonstick',
-        pooja_saman:"pooja_saman",
-        
-        // Add additional categories as needed
-      };
+    const normalizedQuery = query.toLowerCase();
+    console.log("Products fetched from context:", products);
 
-      const normalizedQuery = query.toLowerCase();
+    // Split the query into individual words
+    const queryWords = normalizedQuery.split(" ");
 
-      // Check if the query contains keywords that match the categories
-      const matchingCategory = Object.keys(categoryRedirects).find((key) =>
-        normalizedQuery.includes(key) // Check if query includes the key
-      );
+    // Initialize result array
+    let filteredResults = [];
 
-      if (matchingCategory) {
-        navigate(`/category/${categoryRedirects[matchingCategory]}`);
-        return; // Exit early to avoid setting results state
-      }
+    // Loop through each category in the products
+    Object.keys(products).forEach(category => {
+      const categoryProducts = products[category] || []; // Get products from the matched category
 
-      // If no category redirect, search through products
-      const filteredResults = Object.values(products).flat().filter((product) =>
-        product.title.toLowerCase().includes(normalizedQuery)
-      );
+      // Filter based on title and metal matches
+      categoryProducts.forEach(product => {
+        const productTitle = product.title.toLowerCase();
+        const productMetal = product.metal ? product.metal.toLowerCase() : '';
 
-      setResults(filteredResults);
-      setLoading(false);
-    };
+        // Check if any word from the query is found in the product's title or metal
+        const isTitleMatch = queryWords.some(word => productTitle.includes(word));
+        const isMetalMatch = queryWords.some(word => productMetal.includes(word));
 
-    fetchResults();
-  }, [query, navigate, products]);
+        // If either the title or metal matches, add to results
+        if (isTitleMatch || isMetalMatch) {
+          filteredResults.push(product);
+        }
+      });
+    });
+
+    // Set results
+    setResults(filteredResults); // Update results state
+  }, [query, products]); // Rerun the effect if query or products change
 
   if (loading) {
-    return <div>Loading...</div>; // Loading state
+    return <div className="text-center mt-5"><span className="spinner-border text-primary"></span> Loading...</div>; // Show loading spinner
   }
 
   return (
-    <div className="search-results">
-      <h1>Search Results for: "{query}"</h1>
+    <div className="container mt-4">
+      <h1 className="text-center text-primary">Search Results for: "{query}"</h1>
       {results.length > 0 ? (
-        <ul>
-          {results.map((product) => (
-            <li key={product.id}>
-              <h2>{product.title}</h2>
-              <p>{product.description}</p>
-            </li>
+        <div className="row">
+          {results.map(product => (
+            <div key={product.id} className="col-md-4 col-sm-6 mb-4">
+              <div className="card shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title">{product.title}</h5>
+                  <p className="card-text"><strong>Material:</strong> {product.metal}</p>
+                  <p className="card-text"><strong>Brand:</strong> {product.brand}</p>
+                  <a href={`/product/${product.id}`} className="btn btn-primary">View Details</a>
+                </div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
-        <p>No results found. Try a different search.</p>
+        <p className="text-center text-muted mt-4">No results found. Please try a different search query.</p>
       )}
     </div>
   );
-};
+}
 
 export default SearchResults;
